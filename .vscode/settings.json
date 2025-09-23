@@ -1,0 +1,5 @@
+{
+    "java.import.gradle.enabled": true,
+    "java.import.gradle.wrapper.enabled": true,
+    "java.import.gradle.java.home": "/Users/NaomiNg/.sdkman/candidates/java/17.0.14.fx-zulu/zulu-17.jdk/Contents/Home"
+}

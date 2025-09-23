@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "seedu.address.Main",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Gradle Run)",
+            "request": "launch",
+            "mainClass": "seedu.address.Main",
+            "projectName": "tp"
+        }
+    ]
+}
