@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.CommandValidator;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddedOn;
@@ -48,11 +47,6 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-
-        String invalidPrefixError = CommandValidator.validateCommand(args);
-        if (invalidPrefixError != null) {
-            throw new ParseException(invalidPrefixError);
-        }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_ORGANISATION, PREFIX_EVENT, PREFIX_NOTE, PREFIX_TAG,
