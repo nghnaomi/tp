@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.tag.Tag.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.tag.Tag.isValidTagName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,12 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
         String[] tagKeywords = trimmedArgs.split("\\s+");
         List<Tag> tagList = new ArrayList<>();
         for (String s : tagKeywords) {
+            try {
+                checkArgument(isValidTagName(s), MESSAGE_CONSTRAINTS);
+            } catch (IllegalArgumentException e) {
+                throw new ParseException(
+                        String.format(e.getMessage()));
+            }
             tagList.add(new Tag(s));
         }
 
