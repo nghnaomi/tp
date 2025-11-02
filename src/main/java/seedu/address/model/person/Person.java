@@ -69,7 +69,7 @@ public class Person {
     }
 
     /**
-     * If both notes and country is included in initialisation.
+     * If channel is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country, Organisation organisation,
                   Event event, Note note, Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage,
