@@ -60,6 +60,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Offset;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -215,7 +216,7 @@ public class AddCommandParserTest {
         //Offset beyond bounds
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_OFFSET_DESC,
-                "Invalid command format! \n" + "Offset must be in the format +HH:MM or -HH:MM.");
+                "Invalid Offset format: " + Offset.MESSAGE_CONSTRAINTS);
     }
 
     // Channel parsing tests
