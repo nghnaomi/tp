@@ -20,7 +20,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 3. Copy the file to the folder you want to use as the _home folder_ for Worldly.
 4. Open a command terminal (e.g., Terminal for Mac users) and navigate to the folder you put the jar file in with the commands below:
 - `cd` (Windows) or `pwd` (Mac/Linux) to check the current folder path.
-- `cd foldername` to enter a subfolder within the current folder. For example,`cd first\second` (Windows) or `cd first/second` (Mac/Linux) would enter a folder named "first", followed by a folder named "second" (located within "first").
+- `cd foldername` to enter a subfolder within the current folder. For example, `cd first\second` (Windows) or `cd first/second` (Mac/Linux) would enter a folder named "first", followed by a folder named "second" (located within "first").
 - `cd ..` navigates to the previous folder.
 5. Once you are in the folder that contains the jar file, use the `java -jar worldly.jar` command to run the application.<br>
    ![Ui](images/Ui.png)<br>
@@ -45,7 +45,7 @@ Please refer to the **Commands** below for details of each command.
 * Add up to 500 contacts with only 5 mandatory fields to start (name, phone number, email, address and offset)
 * Edit contacts for details you may have initially left out
 * Tag each contact with up to 10 custom tags
-* Worldly automatically validates your contact details (like email, offset, and country) and will reject entries that don’t match the allowed format — so your contact list always stays clean.
+* Worldly automatically validates your contact details (such as email, offset, and country) and will reject entries that don’t match the allowed format so your contact list always stays clean.
 
 ### Organise your contact list
 * Archive and unarchive contacts to hide them from the main list while keeping their details stored
@@ -70,10 +70,6 @@ If your changes to the data file render its format invalid, Worldly may behave i
 
 **:information_source: Notes about the command format:**<br>
 
-* Offset must be typed **immediately after the prefix**.
-  <br>
-  e.g., `offset: +08:00` will not work, but `offset:+08:00` will.
-
 * `UPPER_CASE` indicates the parameters to be supplied by the user.<br>
   e.g., In `add name:NAME`, `NAME` is a parameter which can be used as `add name:John Doe`.
 
@@ -97,11 +93,11 @@ If your changes to the data file render its format invalid, Worldly may behave i
 Shows the description and format of all actions a user can perform with Worldly, as well as the following in separate tabs:
 * A table of valid country names for the `country:COUNTRY` field and their corresponding calling codes.
 * A table of various regions and their timezones with respect to UTC for reference.
-<!-- TO CHECK AGAIN -->
 * A table of valid languages for the `language:LANGUAGE` field and a basic greeting in those languages.
 * Shortcut: You can also open the help window by pressing `F1` or selecting *Help → User Guide* from the menu bar.
 
 ![help message](images/helpWindow.png)
+
 Format: `help`
 
 
@@ -112,7 +108,6 @@ Adds a contact to the address book.
 Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
 
 * Do not include : in any field unless it follows the format. Doing so will cause an error.
-<!-- TO CHECK AGAIN -->
 * No duplicate names are allowed.
 * A tag with the contact's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
 * Tags must be alphanumeric.
@@ -121,7 +116,7 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
 * The preferred communication channel field may be omitted, but if it is included, it **cannot be left blank**. The channel field is **case-insensitive** but you must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM.
 * The language field is **case-insensitive** but must match a language in the provided list (in `help`) **exactly**.
 * With the exceptions of the channel and tag fields, optional fields can be included and left blank (e.g., `country:`), which would have the same effect as omitting them from the command entirely.
-* A contact can have up to 10 tags (including 0). Each tag must be added with `tag:`.
+* A contact can have up to 10 custom tags (including 0). Each tag must be added with `tag:`.
 * There are limits to how long each field can be. They are as follows:<br>
   `name:`70 characters<br>
   `email:` 254 characters<br>
@@ -132,9 +127,10 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
   `tag:` 30 characters per tag
 
 <br>
-<!-- To insert image -->
 
-*Image: Before and after of an edit. Upon successfully adding a contact, you should see a confirmation message.*
+![result for add](images/add.png)
+
+*Image: Upon successfully adding a contact, you should see a confirmation message.*
 
 
 Examples:
@@ -157,12 +153,13 @@ Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [o
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative. You can remove all the contact’s tags by typing `tag:` without specifying any tags after it.
+* When editing tags, the existing tags of the contact will be removed, i.e adding of tags is not cumulative. You can remove all the contact’s tags by typing `tag:` without specifying any tags after it.
 * If the currently viewed list is not the main list (e.g., if a `find` command was previously run), the index will refer to that of the **current list**, not the main list.
 * If you accidentally mistype a prefix (e.g., `emails:` instead of `email:`), the app will notify you with an error message and show the correct usage format.
 
 <br>
-<!-- To insert image -->
+
+![result for edit](images/edit.png)
 
 *Image: Upon successfully editing a contact, you should see a confirmation message.*
 
@@ -253,12 +250,10 @@ Format: `archive INDEX`
 * Command format and function is similar to delete, except the contact is just moved to a separate list accessible
   with `archivelist` and can be unarchived at a later time.
 * Displayed list will be main list (`list`) after archiving is done, regardless of previously applied filters (e.g., `find`).
-  ![result for 'archive 3'](images/archive.jpg)
-  ![result for 'archivelist'](images/archivelist.jpg)
+![result for 'archive 3'](images/archive.jpg)
+![result for 'archivelist'](images/archivelist.jpg)
 
-<br>
-
-*Image: By archiving NAME, the contact disappears from the main list. NAME can be found in the archive list, accessible with `archivelist`.*
+*Image: By archiving Raj, the contact disappears from the main list. Raj can be found in the archive list, accessible with `archivelist`.*
 
 Examples:
 * `list` followed by `archive 2` archives the 2nd contact in the address book.
@@ -291,9 +286,10 @@ Format: `sortname`
 * This is the default sorting order upon opening the app.
 
 <br>
-<!-- To insert image -->
 
-*Image: An example of a sorted list can be seen above.*
+![result for 'sortname'](images/sortname.png)
+
+*Image: An example of a contact list sorted by name can be seen above.*
 
 
 ### Sorting contacts by country: `sortcountry`
@@ -349,6 +345,16 @@ Format: `exit`
 
 **Q:** Can I undo a command if I delete or edit a contact by mistake?<br>
 **A:** Worldly does not currently have an undo feature. Deletions or edits are immediate, thus it is recommended to make periodic backups of `data/addressbook.json`.
+
+<br>
+
+**Q:** I have typed a value that matches one in a given list but it is not working.<br>
+**A:** Please ensure that all fields match exactly, and that you have no used any characters that look similar but are different. One thing to take note of especially would be the apostrophe.
+
+<br>
+
+**Q:** I have typed a value that matches one in a given list but it is not working.<br>
+**A:** Please ensure that all fields match exactly, and that you have no used any characters that look similar but are different. One thing to take note of especially would be the apostrophe.
 
 --------------------------------------------------------------------------------------------------------------------
 
