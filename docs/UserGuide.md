@@ -111,7 +111,7 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
 * No duplicate names are allowed.
 * A tag with the contact's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
 * Tags must be alphanumeric.
-* The offset refers to the timezone offset with respect to UTC and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
+* The offset refers to the timezone offset with respect to UTC and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values. Do note that while offsets accounting for DST are not shown in the table, it is possible to set them as the offset. When DST takes effect, the offsets in the help table update automatically for the respective regions.
 * The country field is **case-insensitive** but must match a country in the provided list (in `help`) **exactly**.
 * The preferred communication channel field may be omitted, but if it is included, it **cannot be left blank**. The channel field is **case-insensitive** but you must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM.
 * The language field is **case-insensitive** but must match a language in the provided list (in `help`) **exactly**.
