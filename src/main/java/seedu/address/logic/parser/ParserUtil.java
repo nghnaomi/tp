@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -202,8 +201,7 @@ public class ParserUtil {
         String trimmedInput = input.trim();
 
         if (!trimmedInput.matches("^[+-](?:0\\d|1[0-4]):[0-5]\\d$")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Offset must be in the format +HH:MM or -HH:MM."));
+            throw new ParseException(String.format("Invalid Offset format: " + Offset.MESSAGE_CONSTRAINTS));
         }
         try {
             return new Offset(trimmedInput);
