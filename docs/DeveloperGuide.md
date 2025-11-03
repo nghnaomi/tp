@@ -359,9 +359,9 @@ The app also supports finding contacts by various criteria:
 
 #### Implementation
 
-- `FindCountryCommandParser` (not shown) trims the raw argument and builds a `Country` value. 
+- `FindCountryCommandParser` (not shown) trims the raw argument and builds a `Country` value.
 - Construction validates against `Country.isValidCountry(...)`, which accepts only ISO country display names in English (e.g., “Singapore”, “United States”, “China”).
-- `FindCountryCommand` encapsulates a `CountryContainsKeywordPredicate` which holds the target `Country`. 
+- `FindCountryCommand` encapsulates a `CountryContainsKeywordPredicate` which holds the target `Country`.
 - The predicate returns true if `person.getCountry().equals(targetCountry)`. This is an exact match on the `Country` value (which is inherently case-insensitive). Contacts without a country (empty value) do not match any country.
 - The model replaces the current filter with the country predicate on the model’s filtered list. JavaFX observes the list and the UI refreshes automatically.
 
@@ -453,6 +453,7 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 3a. Any field invalid → Worldly shows an error message indicating the offending field(s).
 3b. Contact already exists (by identity; name is case-insensitive) → Worldly shows “This person already exists.”
 3c. Address book has reached 500 contacts → Worldly shows “Maximum of 500 contacts reached.”
@@ -466,13 +467,14 @@ Actor: User
 **MSS**
 
 1. User chooses to view contacts.
-2. User types list. 
+2. User types list.
 3. System retrieves all unarchived contacts and applies the current sort mode (name/country/date). The sort mode is name by default.
 4. System displays contacts with every specified field (name, country, note preview, etc.) in the list.
 
     Use case ends.
 
 **Extensions**
+
 3a. User changes sort → User types sortname / sortcountry / sortdate; list reorders accordingly and the mode persists.
 
 <br>
@@ -491,6 +493,7 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 3a. Index invalid (non-numeric/out of bounds) → System shows “Invalid index.”
 
 <br>
@@ -503,13 +506,14 @@ Actor: User
 
 1. User chooses to edit a contact.
 2. User types edit INDEX with one or more fields to change.
-3. System validates changed fields and checks for duplicates if identity fields change. 
-4. If valid, the system updates the contact. 
+3. System validates changed fields and checks for duplicates if identity fields change.
+4. If valid, the system updates the contact.
 5. Updated details appear in the list.
 
     Use case ends.
 
 **Extensions**
+
 3a. No fields provided → System shows “At least one field to edit must be provided.”
 3b. Any edited field invalid (same rules as UC01) → System shows an appropriate error message.
 3c. Duplicate prefixes (e.g., two emails) → System shows a duplicate-prefix error.
@@ -531,6 +535,7 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 2a. COUNTRY not recognized (not in ISO list) → System rejects during parsing and shows an error.
 3a. No matches → System shows “0 persons listed!” and displays an empty list.
 3b. User sorts after find → Sort applies to the filtered subset only; the filter remains active.
@@ -551,6 +556,7 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 2a. No `tag: TAG` provided → System shows invalid command format with usage.
 3a. No matches → System shows “0 persons listed!”.
 
@@ -562,14 +568,15 @@ Actor: User
 
 **MSS**
 
-1. User chooses how to order the current list. 
-2. User types sortname / sortcountry / sortdate. 
-3. System sorts the underlying list accordingly and persists the sort mode. 
+1. User chooses how to order the current list.
+2. User types sortname / sortcountry / sortdate.
+3. System sorts the underlying list accordingly and persists the sort mode.
 4. UI refreshes to reflect the new order, respecting any active filters and the current archive view.
 
     Use case ends.
 
 **Extensions**
+
 2a. Sorting while viewing archived list → Sort applies and Worldly stays on archived view.
 2b. Contacts with no country in sortcountry → They appear last (stable order within that bucket).
 
@@ -589,6 +596,7 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 2a. Invalid index → System shows “Invalid index.”
 4a. User unarchives from the archived view using unarchive INDEX → Contact returns to the unarchived list; sort mode is reapplied.
 
@@ -601,13 +609,14 @@ Actor: User
 **MSS**
 
 1. User wants to see contacts by when they were added on.
-2. User types sortdate. 
-3. System sorts by the stored timestamp (AddedOn) in ascending chronological order. 
+2. User types sortdate.
+3. System sorts by the stored timestamp (AddedOn) in ascending chronological order.
 4. UI displays the timeline order.
 
     Use case ends.
 
 **Extensions**
+
 2a. Some contacts have identical timestamps → Stable sort preserves their relative order.
 2b. A contact missing the timestamp → System ensures the field is set at creation; absence is treated as invalid data and rejected earlier (UC01).
 
@@ -619,13 +628,14 @@ Actor: User
 
 **MSS**
 
-1. User needs guidance on commands and country/language lists, and country codes for calling. 
-2. User types help. 
+1. User needs guidance on commands and country/language lists, and country codes for calling.
+2. User types help.
 3. System opens the Help window with command summaries and validated lists (e.g., countries, language options, country codes).
 
     Use case ends.
 
 **Extensions**
+
 3a. Help window already minimized → System brings the existing window to front (user may need to restore it if OS keeps it minimized).
 
 ### Non-Functional Requirements
