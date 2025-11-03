@@ -40,6 +40,7 @@ public class Main {
         // the user (if looking at the log output) that the said warning appearing in
         // the log
         // can be ignored.
+        logger.info("Wordly application starting");
         logger.warning("The warning about Unsupported JavaFX configuration below (if any) can be ignored.");
         Application.launch(MainApp.class, args);
     }
