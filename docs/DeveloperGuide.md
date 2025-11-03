@@ -376,10 +376,12 @@ The app also supports finding contacts by various criteria:
 | Test                               | Command                  | Expected Outcome                                                             |
 |------------------------------------|--------------------------|------------------------------------------------------------------------------|
 | Find valid country with matches    | `findcountry China`      | Only contacts whose country is exactly China are listed; result count shown. |
-| Find valid country with no matches | `findcountry Malaysia`   | “0 persons listed!” and the list becomes empty.                              |
-| Find invalid country               | `findcountry Singapur`   | Error: invalid command format with usage; no change to the current list.     |
+| Find valid country with no matches | `findcountry Malaysia`   | “0 persons listed!” and the list becomes empty.                    |
+| Find invalid country               | `findcountry Singapur`   | Error: invalid command format with usage; no change to the current list. |
 
---------------------------------------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
