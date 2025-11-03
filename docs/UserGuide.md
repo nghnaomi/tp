@@ -142,7 +142,7 @@ Shows a list of all contacts in the address book. The list is sorted in alphabet
 
 Format: `list`
 <div style="page-break-after: always;"></div>
-<div style="page-break-after: always;"></div>
+
 ### Editing a contact: `edit`
 
 Edits an existing contact in the address book.
