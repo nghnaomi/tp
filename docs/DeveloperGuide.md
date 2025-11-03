@@ -257,6 +257,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
+<div style="page-break-after: always;"></div>
 
 ## **Advanced Features**
 
@@ -372,11 +373,11 @@ The app also supports finding contacts by various criteria:
 
 #### Manual Test Cases
 
-| Test                               | Command                          | Expected Outcome                                                   |
-|------------------------------------|----------------------------------|--------------------------------------------------------------------|
-| Find valid country with matches    | `findcountry China`              | Only contacts whose country is exactly China are listed; result count shown. |
-| Find valid country with no matches | `findcountry Malaysia`           | “0 persons listed!” and the list becomes empty.                    |
-| Find invalid country | `findcountry Singapur` | Error: invalid command format with usage; no change to the current list. |
+| Test                               | Command                  | Expected Outcome                                                   |
+|------------------------------------|--------------------------|--------------------------------------------------------------------|
+| Find valid country with matches    | `findcountry China`      | Only contacts whose country is exactly China are listed; result count shown. |
+| Find valid country with no matches | `findcountry Malaysia`   | “0 persons listed!” and the list becomes empty.                    |
+| Find invalid country               | `findcountry Singapur`   | Error: invalid command format with usage; no change to the current list. |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
