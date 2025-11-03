@@ -267,11 +267,11 @@ The app now supports **archiving and unarchiving** contacts to help users keep t
 
 #### Commands
 
-| Action        | Command Format & Example |
-|---------------|-------------------------|
-| Archive       | `archive INDEX` <br> e.g., `archive 1` → archives the first contact in the current view. |
+| Action        | Command Format & Example                                                                         |
+|---------------|--------------------------------------------------------------------------------------------------|
+| Archive       | `archive INDEX` <br> e.g., `archive 1` → archives the first contact in the current view.         |
 | Unarchive     | `unarchive INDEX` <br> e.g., `unarchive 2` → restores the second contact from the archived list. |
-| List Archives | `archivelist` <br> e.g., `archivelist` → displays all archived contacts. |
+| List Archives | `archivelist` <br> e.g., `archivelist` → displays all archived contacts.                         |
 
 #### Implementation
 
@@ -308,12 +308,12 @@ The app now supports **archiving and unarchiving** contacts to help users keep t
 
 #### Manual Test Cases
 
-| Test | Command | Expected Outcome                                                  |
-|------|---------|-------------------------------------------------------------------|
-| Archive a contact | `archive 1` | Contact is moved from unarchived list; success message displayed. |
-| List archives | `archivelist` | Only archived contacts displayed.                                 |
-| Unarchive a contact | `unarchive 1` | Contact restored to unarchived list; success message displayed.   |
-| Unarchive an unarchived contact | `unarchive 1` | Error message: The person index provided is invalid. |             |
+| Test                            | Command       | Expected Outcome                                                  |
+|---------------------------------|---------------|-------------------------------------------------------------------|
+| Archive a contact               | `archive 1`   | Contact is moved from unarchived list; success message displayed. |
+| List archives                   | `archivelist` | Only archived contacts displayed.                                 |
+| Unarchive a contact             | `unarchive 1` | Contact restored to unarchived list; success message displayed.   |
+| Unarchive an unarchived contact | `unarchive 1` | Error message: The person index provided is invalid.              |
 
 ---
 
@@ -335,11 +335,11 @@ The app also supports sorting contacts by various criteria:
 
 #### Manual Test Cases
 
-| Test               | Command | Expected Outcome                                       |
-|--------------------|---------|--------------------------------------------------------|
-| Sort by name       | `sortname` | Contacts listed alphabetically by name.                |
-| Sort by country    | `sortcountry` | Contacts listed alphabetically by country.             |
-| Sort by date added | `sortdate` | Contacts listed from earliest to latest added on date. |
+| Test               | Command                          | Expected Outcome                                       |
+|--------------------|----------------------------------|--------------------------------------------------------|
+| Sort by name       | `sortname`                       | Contacts listed alphabetically by name.                |
+| Sort by country    | `sortcountry`                    | Contacts listed alphabetically by country.             |
+| Sort by date added | `sortdate`                       | Contacts listed from earliest to latest added on date. |
 | Sort after find    | `find Singapore` then `sortname` | Only filtered contacts are sorted; others hidden.      |
 
 ---
@@ -353,7 +353,7 @@ The app also supports finding contacts by various criteria:
 | Find by Name         | `find NAME` <br> e.g., `find John` → displays John's contact card if he is in the addressbook.                  |
 | Find by Country      | `findcountry COUNTRY` <br> e.g., `findcountry Singapore` → lists all the contacts with country field Singapore. |
 | Find by Organisation | `findorganisation` <br> e.g., `findorganisation NUS` → lists contacts with organisation NUS.                    |
-| Find by Tag | `findtag` <br> e.g., `findtag friends` → lists contacts with tag friends. |
+| Find by Tag          | `findtag` <br> e.g., `findtag friends` → lists contacts with tag friends.                                       |
 
 - `find`, `findcountry`, `findorganisation` and `findtag` are implemented similarly.
 - The following implementation details, design choices, and manual test cases are given for `findcountry` only.
@@ -373,8 +373,8 @@ The app also supports finding contacts by various criteria:
 
 #### Manual Test Cases
 
-| Test                               | Command                  | Expected Outcome                                                   |
-|------------------------------------|--------------------------|--------------------------------------------------------------------|
+| Test                               | Command                  | Expected Outcome                                                             |
+|------------------------------------|--------------------------|------------------------------------------------------------------------------|
 | Find valid country with matches    | `findcountry China`      | Only contacts whose country is exactly China are listed; result count shown. |
 | Find valid country with no matches | `findcountry Malaysia`   | “0 persons listed!” and the list becomes empty.                    |
 | Find invalid country               | `findcountry Singapur`   | Error: invalid command format with usage; no change to the current list. |
