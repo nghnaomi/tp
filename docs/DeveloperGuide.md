@@ -790,3 +790,24 @@ testers are expected to do more *exploratory* testing.
     1. Perform several add/delete/edit operations. Close the app.
 
     2. Relaunch. <br> Expected: All changes persist; no data loss.
+
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Expand communication channels options:**
+   Currently, only five communication channels are supported (phone, email, SMS, WhatsApp, Telegram), which is
+   too limited and may not cover platforms commonly used in other countries.
+   We plan to support additional valid platforms.
+   Future versions will include communication channel platforms commonly used in other countries to better
+   accommodate exchange students. For example, users will be able to select from additional platforms such as
+   LINE or WeChat.
+
+
+2. **Broader range of language options:**
+   The Preferred Language field currently supports a fixed list of languages from Help Window
+   which is too limited. We plan to support an expandable set of valid languages.
+   Future versions will include additional languages to be added to the current list, ensuring greater
+   inclusivity for exchange students from diverse linguistic backgrounds while maintaining consistent validation.
+   For example, users will be able to select languages beyond the initial fixed list, such as Pawnee or Taa.
