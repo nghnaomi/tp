@@ -40,7 +40,6 @@ Please refer to the **Commands** below for details of each command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## :star: Features
-
 ### Create new contacts
 * Add up to 500 contacts with only 5 mandatory fields to start (name, phone number, email, address and offset)
 * Edit contacts for details you may have initially left out
@@ -142,7 +141,8 @@ Examples:
 Shows a list of all contacts in the address book. The list is sorted in alphabetical order of the contacts' names by default, but if a sort command was previously run (e.g., `sortdate`), it will follow the last requested order.
 
 Format: `list`
-
+<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>
 ### Editing a contact: `edit`
 
 Edits an existing contact in the address book.
