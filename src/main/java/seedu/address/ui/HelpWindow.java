@@ -215,7 +215,7 @@ public class HelpWindow extends UiPart<Stage> {
                         + "e.g. edit 2 name:James Lee email:jameslee@example.com"),
                 new CommandEntry("Delete", "delete INDEX\n e.g. delete 3"),
                 new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g. find James Jake"),
-                new CommandEntry("Find tag", "findtag TAG\n e.g. findtag friends"),
+                new CommandEntry("Find tag", "findtag TAG [MORE_TAGS]\n e.g. findtag friends"),
                 new CommandEntry("Find country", "findcountry COUNTRY\n e.g. findcountry Singapore"),
                 new CommandEntry("Find organisation", "findorganisation ORGANISAION\n e.g. findorganisation NUS"),
                 new CommandEntry("Archive", "archive INDEX"),

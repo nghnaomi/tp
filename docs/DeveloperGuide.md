@@ -258,6 +258,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
+<div style="page-break-after: always;"></div>
 
 ## **Advanced Features**
 
@@ -267,11 +268,11 @@ The app now supports **archiving and unarchiving** contacts to help users keep t
 
 #### Commands
 
-| Action        | Command Format & Example |
-|---------------|-------------------------|
-| Archive       | `archive INDEX` <br> e.g., `archive 1` → archives the first contact in the current view. |
+| Action        | Command Format & Example                                                                         |
+|---------------|--------------------------------------------------------------------------------------------------|
+| Archive       | `archive INDEX` <br> e.g., `archive 1` → archives the first contact in the current view.         |
 | Unarchive     | `unarchive INDEX` <br> e.g., `unarchive 2` → restores the second contact from the archived list. |
-| List Archives | `archivelist` <br> e.g., `archivelist` → displays all archived contacts. |
+| List Archives | `archivelist` <br> e.g., `archivelist` → displays all archived contacts.                         |
 
 #### Implementation
 
@@ -308,12 +309,12 @@ The app now supports **archiving and unarchiving** contacts to help users keep t
 
 #### Manual Test Cases
 
-| Test | Command | Expected Outcome                                                  |
-|------|---------|-------------------------------------------------------------------|
-| Archive a contact | `archive 1` | Contact is moved from unarchived list; success message displayed. |
-| List archives | `archivelist` | Only archived contacts displayed.                                 |
-| Unarchive a contact | `unarchive 1` | Contact restored to unarchived list; success message displayed.   |
-| Unarchive an unarchived contact | `unarchive 1` | Error message: The person index provided is invalid. |             |
+| Test                            | Command       | Expected Outcome                                                  |
+|---------------------------------|---------------|-------------------------------------------------------------------|
+| Archive a contact               | `archive 1`   | Contact is moved from unarchived list; success message displayed. |
+| List archives                   | `archivelist` | Only archived contacts displayed.                                 |
+| Unarchive a contact             | `unarchive 1` | Contact restored to unarchived list; success message displayed.   |
+| Unarchive an unarchived contact | `unarchive 1` | Error message: The person index provided is invalid.              |
 
 ---
 
@@ -335,11 +336,11 @@ The app also supports sorting contacts by various criteria:
 
 #### Manual Test Cases
 
-| Test               | Command | Expected Outcome                                       |
-|--------------------|---------|--------------------------------------------------------|
-| Sort by name       | `sortname` | Contacts listed alphabetically by name.                |
-| Sort by country    | `sortcountry` | Contacts listed alphabetically by country.             |
-| Sort by date added | `sortdate` | Contacts listed from earliest to latest added on date. |
+| Test               | Command                          | Expected Outcome                                       |
+|--------------------|----------------------------------|--------------------------------------------------------|
+| Sort by name       | `sortname`                       | Contacts listed alphabetically by name.                |
+| Sort by country    | `sortcountry`                    | Contacts listed alphabetically by country.             |
+| Sort by date added | `sortdate`                       | Contacts listed from earliest to latest added on date. |
 | Sort after find    | `find Singapore` then `sortname` | Only filtered contacts are sorted; others hidden.      |
 
 ---
@@ -353,16 +354,16 @@ The app also supports finding contacts by various criteria:
 | Find by Name         | `find NAME` <br> e.g., `find John` → displays John's contact card if he is in the addressbook.                  |
 | Find by Country      | `findcountry COUNTRY` <br> e.g., `findcountry Singapore` → lists all the contacts with country field Singapore. |
 | Find by Organisation | `findorganisation` <br> e.g., `findorganisation NUS` → lists contacts with organisation NUS.                    |
-| Find by Tag | `findtag` <br> e.g., `findtag friends` → lists contacts with tag friends. |
+| Find by Tag          | `findtag` <br> e.g., `findtag friends` → lists contacts with tag friends.                                       |
 
 - `find`, `findcountry`, `findorganisation` and `findtag` are implemented similarly.
 - The following implementation details, design choices, and manual test cases are given for `findcountry` only.
 
 #### Implementation
 
-- `FindCountryCommandParser` (not shown) trims the raw argument and builds a `Country` value. 
+- `FindCountryCommandParser` (not shown) trims the raw argument and builds a `Country` value.
 - Construction validates against `Country.isValidCountry(...)`, which accepts only ISO country display names in English (e.g., “Singapore”, “United States”, “China”).
-- `FindCountryCommand` encapsulates a `CountryContainsKeywordPredicate` which holds the target `Country`. 
+- `FindCountryCommand` encapsulates a `CountryContainsKeywordPredicate` which holds the target `Country`.
 - The predicate returns true if `person.getCountry().equals(targetCountry)`. This is an exact match on the `Country` value (which is inherently case-insensitive). Contacts without a country (empty value) do not match any country.
 - The model replaces the current filter with the country predicate on the model’s filtered list. JavaFX observes the list and the UI refreshes automatically.
 
@@ -373,11 +374,14 @@ The app also supports finding contacts by various criteria:
 
 #### Manual Test Cases
 
-| Test                               | Command                          | Expected Outcome                                                   |
-|------------------------------------|----------------------------------|--------------------------------------------------------------------|
-| Find valid country with matches    | `findcountry China`              | Only contacts whose country is exactly China are listed; result count shown. |
-| Find valid country with no matches | `findcountry Malaysia`           | “0 persons listed!” and the list becomes empty.                    |
-| Find invalid country | `findcountry Singapur` | Error: invalid command format with usage; no change to the current list. |
+| Test                               | Command                  | Expected Outcome                                                             |
+|------------------------------------|--------------------------|------------------------------------------------------------------------------|
+| Find valid country with matches    | `findcountry China`      | Only contacts whose country is exactly China are listed; result count shown. |
+| Find valid country with no matches | `findcountry Malaysia`   | “0 persons listed!” and the list becomes empty.                    |
+| Find invalid country               | `findcountry Singapur`   | Error: invalid command format with usage; no change to the current list. |
+
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -470,7 +474,7 @@ Actor: User
 **MSS**
 
 1. User chooses to view contacts.
-2. User types list. 
+2. User types list.
 3. System retrieves all unarchived contacts and applies the current sort mode (name/country/date). The sort mode is name by default.
 4. System displays contacts with every specified field (name, country, note preview, etc.) in the list.
 
@@ -509,8 +513,8 @@ Actor: User
 
 1. User chooses to edit a contact.
 2. User types edit INDEX with one or more fields to change.
-3. System validates changed fields and checks for duplicates if identity fields change. 
-4. If valid, the system updates the contact. 
+3. System validates changed fields and checks for duplicates if identity fields change.
+4. If valid, the system updates the contact.
 5. Updated details appear in the list.
 
     Use case ends.
@@ -577,9 +581,9 @@ Actor: User
 
 **MSS**
 
-1. User chooses how to order the current list. 
-2. User types sortname / sortcountry / sortdate. 
-3. System sorts the underlying list accordingly and persists the sort mode. 
+1. User chooses how to order the current list.
+2. User types sortname / sortcountry / sortdate.
+3. System sorts the underlying list accordingly and persists the sort mode.
 4. UI refreshes to reflect the new order, respecting any active filters and the current archive view.
 
     Use case ends.
@@ -607,7 +611,7 @@ Actor: User
 
 **Extensions**
 
-2a. Invalid index → System shows “Invalid index.” 
+2a. Invalid index → System shows “Invalid index.”
 
 4a. User unarchives from the archived view using unarchive INDEX → Contact returns to the unarchived list; sort mode is reapplied.
 
@@ -620,8 +624,8 @@ Actor: User
 **MSS**
 
 1. User wants to see contacts by when they were added on.
-2. User types sortdate. 
-3. System sorts by the stored timestamp (AddedOn) in ascending chronological order. 
+2. User types sortdate.
+3. System sorts by the stored timestamp (AddedOn) in ascending chronological order.
 4. UI displays the timeline order.
 
     Use case ends.
@@ -640,8 +644,8 @@ Actor: User
 
 **MSS**
 
-1. User needs guidance on commands and country/language lists, and country codes for calling. 
-2. User types help. 
+1. User needs guidance on commands and country/language lists, and country codes for calling.
+2. User types help.
 3. System opens the Help window with command summaries and validated lists (e.g., countries, language options, country codes).
 
     Use case ends.
@@ -812,3 +816,24 @@ testers are expected to do more *exploratory* testing.
     1. Perform several add/delete/edit operations. Close the app.
 
     2. Relaunch. <br> Expected: All changes persist; no data loss.
+
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Expand communication channels options:**
+   Currently, only five communication channels are supported (phone, email, SMS, WhatsApp, Telegram), which is
+   too limited and may not cover platforms commonly used in other countries.
+   We plan to support additional valid platforms.
+   Future versions will include communication channel platforms commonly used in other countries to better
+   accommodate exchange students. For example, users will be able to select from additional platforms such as
+   LINE or WeChat.
+
+
+2. **Broader range of language options:**
+   The Preferred Language field currently supports a fixed list of languages from Help Window
+   which is too limited. We plan to support an expandable set of valid languages.
+   Future versions will include additional languages to be added to the current list, ensuring greater
+   inclusivity for exchange students from diverse linguistic backgrounds while maintaining consistent validation.
+   For example, users will be able to select languages beyond the initial fixed list, such as Pawnee or Taa.
