@@ -9,9 +9,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* * This project is largely based on and a fork of the original [_AB3 codebase_] (https://github.com/nus-cs2103-AY2526S1/tp).
+* This project is largely based on and a fork of the original [_AB3 codebase_] (https://github.com/nus-cs2103-AY2526S1/tp).
 * This documentation page was generated using [_Jekyll_] (https://jekyllrb.com/).
-* Libraries used: [_JavaFX_] (https://openjfx.io/), [_Jackson_] (https://github.com/FasterXML/jackson), [_JUnit5_] (https://github.com/junit-team/junit5).
+* Libraries used: [_JavaFX_] (https://openjfx.io/), [_Jackson_] (https://github.com/FasterXML/jackson), 
+  [_JUnit5_] (https://github.com/junit-team/junit5).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -453,8 +454,11 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 3a. Any field invalid → Worldly shows an error message indicating the offending field(s).
+
 3b. Contact already exists (by identity; name is case-insensitive) → Worldly shows “This person already exists.”
+
 3c. Address book has reached 500 contacts → Worldly shows “Maximum of 500 contacts reached.”
 
 <br>
@@ -473,6 +477,7 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 3a. User changes sort → User types sortname / sortcountry / sortdate; list reorders accordingly and the mode persists.
 
 <br>
@@ -491,6 +496,7 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 3a. Index invalid (non-numeric/out of bounds) → System shows “Invalid index.”
 
 <br>
@@ -510,9 +516,13 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 3a. No fields provided → System shows “At least one field to edit must be provided.”
+
 3b. Any edited field invalid (same rules as UC01) → System shows an appropriate error message.
+
 3c. Duplicate prefixes (e.g., two emails) → System shows a duplicate-prefix error.
+
 3d. Change causes duplicate person → System shows duplicate-person error.
 
 <br>
@@ -531,8 +541,11 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 2a. COUNTRY not recognized (not in ISO list) → System rejects during parsing and shows an error.
+
 3a. No matches → System shows “0 persons listed!” and displays an empty list.
+
 3b. User sorts after find → Sort applies to the filtered subset only; the filter remains active.
 
 <br>
@@ -551,7 +564,9 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 2a. No `tag: TAG` provided → System shows invalid command format with usage.
+
 3a. No matches → System shows “0 persons listed!”.
 
 <br>
@@ -570,7 +585,9 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 2a. Sorting while viewing archived list → Sort applies and Worldly stays on archived view.
+
 2b. Contacts with no country in sortcountry → They appear last (stable order within that bucket).
 
 <br>
@@ -589,7 +606,9 @@ Actor: User
     Use case ends.
 
 **Extensions**
-2a. Invalid index → System shows “Invalid index.”
+
+2a. Invalid index → System shows “Invalid index.” 
+
 4a. User unarchives from the archived view using unarchive INDEX → Contact returns to the unarchived list; sort mode is reapplied.
 
 <br>
@@ -608,7 +627,9 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 2a. Some contacts have identical timestamps → Stable sort preserves their relative order.
+
 2b. A contact missing the timestamp → System ensures the field is set at creation; absence is treated as invalid data and rejected earlier (UC01).
 
 <br>
@@ -626,6 +647,7 @@ Actor: User
     Use case ends.
 
 **Extensions**
+
 3a. Help window already minimized → System brings the existing window to front (user may need to restore it if OS keeps it minimized).
 
 ### Non-Functional Requirements
