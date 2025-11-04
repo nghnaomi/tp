@@ -12,7 +12,7 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters, spaces, dashes, slashes, apostrophes, fullstops"
-                    + "must not be blank, "
+                    + ", must not be blank, "
                     + "and must not exceed 70 characters.";
 
     public static final int MAX_LENGTH = 70;
