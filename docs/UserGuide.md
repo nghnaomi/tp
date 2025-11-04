@@ -351,11 +351,6 @@ Format: `exit`
 **Q:** I have typed a value that matches one in a given list but it is not working.<br>
 **A:** Please ensure that all fields match exactly, and that you have no used any characters that look similar but are different. One thing to take note of especially would be the apostrophe.
 
-<br>
-
-**Q:** I have typed a value that matches one in a given list but it is not working.<br>
-**A:** Please ensure that all fields match exactly, and that you have no used any characters that look similar but are different. One thing to take note of especially would be the apostrophe.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## :jigsaw: Known Issues
