@@ -391,4 +391,249 @@ public class PhoneTest {
         Phone phone2 = new Phone("+651234567890123");
         assertEquals("+651234567890123", phone2.value);
     }
+
+    /**
+     * Tests invalid phone numbers containing multiple plus signs within the number.
+     */
+    @Test
+    public void isValidPhone_multiplePluses_invalid() {
+        assertFalse(Phone.isValidPhone("+65+98765432"));
+        assertFalse(Phone.isValidPhone("123+456+789"));
+    }
+
+    /**
+     * Tests various non-standard separators like slashes or underscores.
+     */
+    @Test
+    public void isValidPhone_withNonStandardSeparators_invalid() {
+        assertFalse(Phone.isValidPhone("123/456/7890"));
+        assertFalse(Phone.isValidPhone("123_456_7890"));
+        assertFalse(Phone.isValidPhone("+65_9876_5432"));
+    }
+
+    /**
+     * Tests phone numbers with mixed symbols and digits.
+     */
+    @Test
+    public void isValidPhone_withMixedSymbols_invalid() {
+        assertFalse(Phone.isValidPhone("+65-98@76#5432"));
+        assertFalse(Phone.isValidPhone("123 456 * 7890"));
+    }
+
+    /**
+     * Tests multiple spaces between digits.
+     */
+    @Test
+    public void isValidPhone_multipleSpaces_valid() {
+        assertTrue(Phone.isValidPhone("123  456  7890"));
+        assertTrue(Phone.isValidPhone("+65  9876  5432"));
+    }
+
+    /**
+     * Tests phones with mixed dash and space separators.
+     */
+    @Test
+    public void isValidPhone_mixedSeparators_valid() {
+        assertTrue(Phone.isValidPhone("+65 98-76 5432"));
+        assertTrue(Phone.isValidPhone("123-456 7890"));
+    }
+
+    /**
+     * Tests country code detection for Scandinavian numbers.
+     */
+    @Test
+    public void countryDetection_scandinavianNumbers_success() {
+        assertEquals("46", new Phone("+46701234567").getCountryCode()); // Sweden
+        assertEquals("47", new Phone("+4790123456").getCountryCode()); // Norway
+        assertEquals("45", new Phone("+4520123456").getCountryCode()); // Denmark
+    }
+
+    /**
+     * Tests that equals() returns false for different formatting but different value.
+     */
+    @Test
+    public void equals_differentNumber_returnsFalse() {
+        Phone phone1 = new Phone("+6598765432");
+        Phone phone2 = new Phone("+6598765433");
+        assertFalse(phone1.equals(phone2));
+    }
+
+    /**
+     * Tests immutability of countryCode field even after toString is called.
+     */
+    @Test
+    public void immutability_countryCode_afterToString() {
+        Phone phone = new Phone("+6598765432");
+        phone.toString();
+        assertEquals("65", phone.countryCode);
+    }
+
+    /**
+     * Tests consistency between toString() and value.
+     */
+    @Test
+    public void toString_matchesStoredValue() {
+        Phone phone = new Phone("+6598765432");
+        assertTrue(phone.toString().contains(phone.value));
+    }
+
+    /**
+     * Tests very long input containing valid but spaced-out digits.
+     */
+    @Test
+    public void isValidPhone_longWithSpaces_valid() {
+        assertTrue(Phone.isValidPhone("1234 5678 9012 345"));
+        assertFalse(Phone.isValidPhone("1234 5678 9012 3456"));
+    }
+
+    /**
+     * Tests behaviour for empty country code symbol "+" only.
+     */
+    @Test
+    public void constructor_plusOnly_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> new Phone("+"));
+    }
+
+    /**
+     * Tests behaviour for phone number with letters after valid digits.
+     */
+    @Test
+    public void isValidPhone_digitsThenLetters_invalid() {
+        assertFalse(Phone.isValidPhone("123456A"));
+        assertFalse(Phone.isValidPhone("+65123456b"));
+    }
+
+    /**
+     * Tests behaviour for phone numbers containing punctuation marks.
+     */
+    @Test
+    public void isValidPhone_withPunctuation_invalid() {
+        assertFalse(Phone.isValidPhone("123,456,7890"));
+        assertFalse(Phone.isValidPhone("123!456?7890"));
+    }
+
+    /**
+     * Tests multiple country codes (invalid scenario).
+     */
+    @Test
+    public void isValidPhone_multipleCountryCodes_invalid() {
+        assertFalse(Phone.isValidPhone("+65+44 98765432"));
+    }
+
+    /**
+     * Tests numbers starting with 0 and no plus sign (domestic format).
+     */
+    @Test
+    public void isValidPhone_domesticLeadingZero_valid() {
+        assertTrue(Phone.isValidPhone("0123456789"));
+        assertTrue(Phone.isValidPhone("08 1234 5678"));
+    }
+
+    /**
+     * Tests numbers starting with 00 (common international prefix without +).
+     */
+    @Test
+    public void isValidPhone_doubleZeroPrefix_valid() {
+        assertTrue(Phone.isValidPhone("006598765432"));
+        assertTrue(Phone.isValidPhone("00441234567890"));
+    }
+
+    /**
+     * Tests country code detection for smaller nations.
+     */
+    @Test
+    public void countryDetection_smallNations_success() {
+        assertEquals("64", new Phone("+64211234567").getCountryCode()); // New Zealand
+        assertEquals("353", new Phone("+353871234567").getCountryCode()); // Ireland
+        assertEquals("41", new Phone("+41791234567").getCountryCode()); // Switzerland
+    }
+
+    /**
+     * Tests invalid characters at the start of a number.
+     */
+    @Test
+    public void isValidPhone_invalidStartingCharacters() {
+        assertFalse(Phone.isValidPhone("*1234567"));
+        assertFalse(Phone.isValidPhone("#98765432"));
+        assertFalse(Phone.isValidPhone("@6598765432"));
+    }
+
+    /**
+     * Tests that value field remains unchanged after multiple hashCode calls.
+     */
+    @Test
+    public void immutability_valueAfterHashCode() {
+        Phone phone = new Phone("911");
+        int hash = phone.hashCode();
+        assertEquals("911", phone.value);
+    }
+
+    /**
+     * Tests that getCountryCode returns non-null for valid plus-prefixed numbers.
+     */
+    @Test
+    public void getCountryCode_nonNullForPlusPrefixed() {
+        assertNotNull(new Phone("+6598765432").getCountryCode());
+        assertNotNull(new Phone("+14155552671").getCountryCode());
+    }
+
+    /**
+     * Tests equality across repeated instances of same string.
+     */
+    @Test
+    public void equals_repeatedInstances_true() {
+        for (int i = 0; i < 10; i++) {
+            assertTrue(new Phone("+6598765432").equals(new Phone("+6598765432")));
+        }
+    }
+
+    /**
+     * Tests that equals is reflexive and symmetric for valid numbers.
+     */
+    @Test
+    public void equals_reflexiveSymmetric_validNumbers() {
+        Phone p1 = new Phone("+6598765432");
+        Phone p2 = new Phone("+6598765432");
+        assertTrue(p1.equals(p2));
+        assertTrue(p2.equals(p1));
+        assertTrue(p1.equals(p1));
+    }
+
+    /**
+     * Tests that equals handles case-insensitive scenarios gracefully.
+     */
+    @Test
+    public void equals_caseInsensitive_sameResult() {
+        Phone p1 = new Phone("+6598765432");
+        Phone p2 = new Phone("+6598765432");
+        assertTrue(p1.equals(p2));
+    }
+
+    /**
+     * Tests phone numbers that are extremely short and invalid.
+     */
+    @Test
+    public void isValidPhone_extremelyShort_invalid() {
+        assertFalse(Phone.isValidPhone("1"));
+        assertFalse(Phone.isValidPhone("9"));
+        assertFalse(Phone.isValidPhone("0"));
+    }
+
+    /**
+     * Tests random long but valid-looking numbers.
+     */
+    @Test
+    public void isValidPhone_randomLong_valid() {
+        assertTrue(Phone.isValidPhone("+112345678901234"));
+        assertTrue(Phone.isValidPhone("999999999999999"));
+    }
+
+    /**
+     * Tests random long invalid numbers (exceeding 15 digits).
+     */
+    @Test
+    public void isValidPhone_randomTooLong_invalid() {
+        assertFalse(Phone.isValidPhone("+12345678901234567"));
+        assertFalse(Phone.isValidPhone("999999999999999999"));
+    }
 }

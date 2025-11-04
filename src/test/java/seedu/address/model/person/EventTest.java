@@ -65,4 +65,43 @@ public class EventTest {
         Event event2 = new Event("Project kickoff");
         assertEquals(event1.hashCode(), event2.hashCode());
     }
+
+    @Test
+    public void isValidEvent_whitespaceOnly_returnsTrue() {
+        assertTrue(Event.isValidEvent("   "));
+    }
+
+    @Test
+    public void isValidEvent_leadingTrailingSpaces_returnsTrue() {
+        assertTrue(Event.isValidEvent("  Networking Night  "));
+    }
+
+    @Test
+    public void isValidEvent_symbols_returnsTrue() {
+        assertTrue(Event.isValidEvent("Tech Conference @ NUS!"));
+    }
+
+    @Test
+    public void isValidEvent_singleChar_returnsTrue() {
+        assertTrue(Event.isValidEvent("A"));
+    }
+
+    @Test
+    public void isValidEvent_unicode_returnsTrue() {
+        assertTrue(Event.isValidEvent("日本 Meeting"));
+    }
+
+    @Test
+    public void equals_caseDifference_returnsFalse() {
+        Event event1 = new Event("Career Fair");
+        Event event2 = new Event("career fair");
+        assertFalse(event1.equals(event2));
+    }
+
+    @Test
+    public void hashCode_emptyEvent_sameHashCode() {
+        Event empty1 = new Event("");
+        Event empty2 = new Event("");
+        assertEquals(empty1.hashCode(), empty2.hashCode());
+    }
 }
