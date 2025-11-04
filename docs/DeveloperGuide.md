@@ -154,7 +154,7 @@ The `Person` class has been extended to support new optional fields:
 - The Offset, Country, CommunicationChannel, PreferredLanguage fields are validated.
 - The AddedOn and isArchived fields cannot be added or edited via the add or edit commands.
 - All the fields are fully serializable to JSON.
-- The fields are positioned in the constructor as: `(Name, Phone, Email, Address, Country, Country, Organisation, Event, Note, CommunicationChannel, Tag, UTC Offset, PreferredLanguage, AddedOn, isArchived)`
+- The fields are positioned in the constructor as: `(Name, Phone, Email, Address, Country, Organisation, Event, Note, CommunicationChannel, Tag, UTC Offset, PreferredLanguage, AddedOn, isArchived)`
 
 ### Storage component
 
@@ -199,7 +199,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add name:David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -276,7 +276,7 @@ The app now supports **archiving and unarchiving** contacts to help users keep t
 
 #### Implementation
 
-- Each `Person` object contains an **archival status** flag (`true` for archived, `false` for unarchived`).
+- Each `Person` object contains an **archival status** flag (`true` for archived, `false` for unarchived).
 - **Archiving a person** (`ArchiveCommand`) replaces the original `Person` in the model with a copy that has `archivalStatus = true`.
 - **Unarchiving** (`UnarchiveCommand`) similarly creates a copy with `archivalStatus = false`.
 - `ArchiveListCommand` updates the filtered list to show only archived contacts.
