@@ -177,4 +177,175 @@ public class OffsetTest {
         assertTrue(Offset.isValidOffset("+14:00"));
         assertTrue(Offset.isValidOffset("-12:00"));
     }
+
+    /**
+     * Tests offsets with leading/trailing whitespace.
+     * Whitespace should make an offset invalid.
+     */
+    @Test
+    public void isValidOffset_withWhitespace_false() {
+        assertFalse(Offset.isValidOffset(" +08:00"));
+        assertFalse(Offset.isValidOffset("+08:00 "));
+        assertFalse(Offset.isValidOffset(" +08:00 "));
+    }
+
+    /**
+     * Tests boundary offsets at extreme valid and invalid limits.
+     */
+    @Test
+    public void constructor_boundaryValues_correctness() {
+        // Valid lower bound
+        assertEquals(new Offset("-12:00").getTotalMinutes(), -720);
+        // Valid upper bound
+        assertEquals(new Offset("+14:00").getTotalMinutes(), 840);
+        // Invalid just beyond bounds
+        assertThrows(IllegalArgumentException.class, () -> new Offset("+14:01"));
+        assertThrows(IllegalArgumentException.class, () -> new Offset("-12:01"));
+    }
+
+    /**
+     * Ensures Offset equality is reflexive, symmetric, and transitive.
+     */
+    @Test
+    public void equals_contract_valid() {
+        Offset a = new Offset("+07:00");
+        Offset b = new Offset("+07:00");
+        Offset c = new Offset("+07:00");
+
+        // Reflexive
+        assertTrue(a.equals(a));
+        // Symmetric
+        assertTrue(a.equals(b) && b.equals(a));
+        // Transitive
+        assertTrue(a.equals(b) && b.equals(c) && a.equals(c));
+    }
+
+    /**
+     * Tests toString() consistency after parsing and reconstructing Offset objects.
+     */
+    @Test
+    public void toString_consistencyAcrossInstances_true() {
+        Offset off1 = new Offset("+03:30");
+        Offset off2 = new Offset(off1.toString());
+        assertEquals(off1.toString(), off2.toString());
+    }
+
+    /**
+     * Tests hashCode consistency across multiple calls.
+     */
+    @Test
+    public void hashCode_idempotent_true() {
+        Offset o = new Offset("+09:00");
+        int h1 = o.hashCode();
+        int h2 = o.hashCode();
+        assertEquals(h1, h2);
+    }
+
+    /**
+     * Tests invalid patterns containing letters and mixed characters.
+     */
+    @Test
+    public void isValidOffset_mixedCharacterGarbage_false() {
+        assertFalse(Offset.isValidOffset("+0A:00"));
+        assertFalse(Offset.isValidOffset("+AA:BB"));
+        assertFalse(Offset.isValidOffset("hello"));
+        assertFalse(Offset.isValidOffset("UTC+08:00"));
+    }
+
+    /**
+     * Tests offsets with zero-padded correctness for negative and positive.
+     */
+    @Test
+    public void constructor_zeroPadded_correctParsing() {
+        assertEquals(new Offset("+09:00").getTotalMinutes(), 540);
+        assertEquals(new Offset("-09:00").getTotalMinutes(), -540);
+    }
+
+    /**
+     * Tests offsets where minutes component is 45 — common in some regions (e.g., Nepal +05:45).
+     */
+    @Test
+    public void constructor_validNonRoundHourOffsets_true() {
+        Offset o = new Offset("+05:45");
+        assertEquals(345, o.getTotalMinutes());
+    }
+
+    /**
+     * Tests invalid cases where offset has too many digits in the hour or minute parts.
+     */
+    @Test
+    public void isValidOffset_tooManyDigits_false() {
+        assertFalse(Offset.isValidOffset("+123:00"));
+        assertFalse(Offset.isValidOffset("+01:000"));
+    }
+
+    /**
+     * Tests invalid input with missing minute digits.
+     */
+    @Test
+    public void isValidOffset_missingMinuteDigits_false() {
+        assertFalse(Offset.isValidOffset("+09:0"));
+        assertFalse(Offset.isValidOffset("+09:"));
+    }
+
+    /**
+     * Tests if compareTo correctly handles identical negative offsets.
+     */
+    @Test
+    public void compareTo_identicalNegativeOffsets_zero() {
+        Offset a = new Offset("-10:00");
+        Offset b = new Offset("-10:00");
+        assertEquals(0, a.compareTo(b));
+    }
+
+    /**
+     * Tests compareTo when comparing positive and negative offsets.
+     */
+    @Test
+    public void compareTo_positiveVsNegative_correctOrder() {
+        Offset neg = new Offset("-03:00");
+        Offset pos = new Offset("+03:00");
+        assertTrue(neg.compareTo(pos) < 0);
+    }
+
+    /**
+     * Ensures invalid input with double colons is rejected.
+     */
+    @Test
+    public void isValidOffset_doubleColons_false() {
+        assertFalse(Offset.isValidOffset("+08::00"));
+        assertFalse(Offset.isValidOffset("-09::30"));
+    }
+
+    /**
+     * Tests equality when one Offset has equivalent total minutes but different string representation.
+     * (Should not be equal because Offset preserves string form).
+     */
+    @Test
+    public void equals_sameMinutesDifferentSigns_false() {
+        assertNotEquals(new Offset("+00:00"), new Offset("-00:00"));
+    }
+
+    /**
+     * Ensures that invalid offset missing minutes (e.g., "+08") throws exception.
+     */
+    @Test
+    public void constructor_missingMinutes_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Offset("+08"));
+    }
+
+    /**
+     * Verifies that equality and hashCode remain consistent for multiple instances created in a loop.
+     */
+    @Test
+    public void equalsAndHashCode_consistencyOverMultipleInstances_true() {
+        for (int i = -12; i <= 14; i += 2) {
+            String formatted = String.format("%+03d:00", i);
+            Offset o1 = new Offset(formatted);
+            Offset o2 = new Offset(formatted);
+            assertEquals(o1, o2);
+            assertEquals(o1.hashCode(), o2.hashCode());
+        }
+    }
 }
+

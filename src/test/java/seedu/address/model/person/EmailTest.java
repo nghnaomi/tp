@@ -96,4 +96,116 @@ public class EmailTest {
         String validEmail = "a".repeat(244) + "@gmail.com";
         assertTrue(Email.isValidEmail(validEmail));
     }
+
+    @Test
+    public void isValidEmail_localPartEdgeCases() {
+        // Local part starting/ending with period
+        assertFalse(Email.isValidEmail(".alice@example.com"));
+        assertFalse(Email.isValidEmail("alice.@example.com"));
+        // Multiple consecutive periods
+        assertFalse(Email.isValidEmail("alice..bob@example.com"));
+        // Valid hyphens in local part
+        assertTrue(Email.isValidEmail("alice-bob@example.com"));
+        // Valid underscores in local part
+        assertTrue(Email.isValidEmail("alice_bob@example.com"));
+        // Valid plus sign
+        assertTrue(Email.isValidEmail("alice+bob@example.com"));
+    }
+
+    @Test
+    public void isValidEmail_domainEdgeCases() {
+        // Domain starting/ending with hyphen
+        assertFalse(Email.isValidEmail("alice@-example.com"));
+        assertFalse(Email.isValidEmail("alice@example-.com"));
+        // Domain starting/ending with period
+        assertFalse(Email.isValidEmail("alice@.example.com"));
+        assertFalse(Email.isValidEmail("alice@example.com."));
+        // Domain with consecutive periods
+        assertFalse(Email.isValidEmail("alice@ex..ample.com"));
+        // Valid long domain
+        assertTrue(Email.isValidEmail("alice@example-subdomain.example.com"));
+        // Numeric domain allowed
+        assertTrue(Email.isValidEmail("alice@123.com"));
+    }
+
+    @Test
+    public void isValidEmail_whitespaceAndSpecialCases() {
+        assertFalse(Email.isValidEmail(" alice@example.com"));
+        assertFalse(Email.isValidEmail("alice@example.com "));
+        assertFalse(Email.isValidEmail("ali ce@example.com"));
+        assertFalse(Email.isValidEmail("alice@exam ple.com"));
+        assertFalse(Email.isValidEmail("alice@exam\tple.com")); // tab character
+        assertFalse(Email.isValidEmail("alice@\nexample.com")); // newline in domain
+    }
+
+    @Test
+    public void equals_differentEmails() {
+        Email email1 = new Email("alice@example.com");
+        Email email2 = new Email("bob@example.com");
+        Email email3 = new Email("alice@example.com");
+        assertTrue(email1.equals(email3));
+        assertFalse(email1.equals(email2));
+    }
+
+    @Test
+    public void isValidEmail_internationalEmails() {
+        // International domain names (punycode) are not valid
+        assertFalse(Email.isValidEmail("user@xn--example-9ta.com"));
+        // Unicode characters in local part are not allowed in most cases
+        assertTrue(Email.isValidEmail("üser@example.com"));
+    }
+
+    @Test
+    public void isValidEmail_multipleAtSymbols() {
+        assertFalse(Email.isValidEmail("alice@@example.com"));
+        assertFalse(Email.isValidEmail("alice@exam@ple.com"));
+    }
+
+    @Test
+    public void isValidEmail_maxLocalAndDomainLengths() {
+        // Local part max 64, domain part max 255
+        String local = "a".repeat(64);
+        String domain = "b".repeat(63) + ".com"; // total < 255
+        assertTrue(Email.isValidEmail(local + "@" + domain));
+        // Exceeding domain length
+        String tooLongDomain = "b".repeat(256) + ".com";
+        assertFalse(Email.isValidEmail(local + "@" + tooLongDomain));
+    }
+
+    @Test
+    public void isValidEmail_variousValidEmails() {
+        String[] validEmails = {
+            "simple@example.com",
+            "very.common@example.com",
+            "disposable.style.email.with+symbol@example.com",
+            "other.email-with-hyphen@example.com",
+            "fully-qualified-domain@example.com",
+            "user.name+tag+sorting@example.com",
+            "x@example.com",
+            "example-indeed@strange-example.com",
+            "admin@mailserver1",
+            "example@s.solutions"
+        };
+
+        for (String email : validEmails) {
+            assertTrue(Email.isValidEmail(email), "Failed for valid email: " + email);
+        }
+    }
+
+    @Test
+    public void isValidEmail_variousInvalidEmails() {
+        String[] invalidEmails = {
+            "Abc.example.com", // missing @
+            "A@b@c@example.com", // multiple @
+            "a\"b(c)d,e:f;g<h>i[j\\k]l@example.com", // invalid characters
+            "just\"not\"right@example.com", // quoted improperly
+            "this is\"not\\allowed@example.com", // spaces
+            "i_like_underscore@but_its_not_allowed_in_this_part.example.com" // underscore in domain
+        };
+
+        for (String email : invalidEmails) {
+            assertFalse(Email.isValidEmail(email), "Failed for invalid email: " + email);
+        }
+    }
 }
+
