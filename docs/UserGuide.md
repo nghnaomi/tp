@@ -10,7 +10,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 
 --------------------------------------------------------------------------------------------------------------------
 
-## :rocket: Quick Start
+## Quick Start
 
 1. Ensure you have Java `17` or above installed on your Computer.<br>
    **Mac users only:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
@@ -35,11 +35,11 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 
 <br>
 
-Please refer to the **Commands** below for details of each command.
+Please refer to the [`Commands`](#commands) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## :star: Features
+## Features
 ### Create new contacts
 * Add up to 500 contacts with only 5 mandatory fields to start (name, phone number, email, address and offset)
 * Edit contacts for details you may have initially left out
@@ -63,7 +63,7 @@ If your changes to the data file render its format invalid, Worldly may behave i
 
 --------------------------------------------------------------------------------------------------------------------
 
-## :speech_balloon: Commands
+## Commands
 
 <div markdown="block" class="alert alert-info">
 
@@ -326,7 +326,7 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## :question: FAQ
+## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Worldly home folder.
@@ -353,14 +353,14 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## :jigsaw: Known Issues
+## Known Issues
 
 * **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 * **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## :earth_asia: Command Summary
+## Command Summary
 
 Action | Format and Examples
 --------|------------------

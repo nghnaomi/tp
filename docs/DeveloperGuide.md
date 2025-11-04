@@ -9,10 +9,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project is largely based on and a fork of the original [_AB3 codebase_] (https://github.com/nus-cs2103-AY2526S1/tp).
-* This documentation page was generated using [_Jekyll_] (https://jekyllrb.com/).
-* Libraries used: [_JavaFX_] (https://openjfx.io/), [_Jackson_] (https://github.com/FasterXML/jackson), 
-  [_JUnit5_] (https://github.com/junit-team/junit5).
+* This project is largely based on and a fork of the original [_AB3 codebase_](https://github.com/nus-cs2103-AY2526S1/tp).
+* This documentation page was generated using [_Jekyll_](https://jekyllrb.com/).
+* Libraries used: [_JavaFX_] (https://openjfx.io/), [_Jackson_](https://github.com/FasterXML/jackson),
+  [_JUnit5_](https://github.com/junit-team/junit5).
 
 --------------------------------------------------------------------------------------------------------------------
 
